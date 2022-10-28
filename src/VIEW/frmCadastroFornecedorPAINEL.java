@@ -32,23 +32,23 @@ public class frmCadastroFornecedorPAINEL extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(100, 100));
         setPreferredSize(new java.awt.Dimension(916, 762));
 
-        jLabel1.setText("Cadastro de Fornecedores");
+        jLabel1.setText("Cadastro de ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(387, 387, 387)
+                .addGap(342, 342, 342)
                 .addComponent(jLabel1)
-                .addContainerGap(376, Short.MAX_VALUE))
+                .addContainerGap(500, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
+                .addGap(244, 244, 244)
                 .addComponent(jLabel1)
-                .addContainerGap(696, Short.MAX_VALUE))
+                .addContainerGap(501, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
