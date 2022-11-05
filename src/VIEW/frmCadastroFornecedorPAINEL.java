@@ -4,6 +4,18 @@
  */
 package VIEW;
 
+import DAO.ConexaoDAO;
+import DAO.FornecedorDAO;
+import DTO.FornecedorDTO;
+
+import java.sql.PreparedStatement;
+import java.sql.Connection;
+import java.util.Vector;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author carlos
@@ -15,6 +27,7 @@ public class frmCadastroFornecedorPAINEL extends javax.swing.JPanel {
      */
     public frmCadastroFornecedorPAINEL() {
         initComponents();
+        listarValores();
     }
 
     /**
@@ -31,7 +44,7 @@ public class frmCadastroFornecedorPAINEL extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtNomeFornecedor = new javax.swing.JTextField();
-        txtCpnjFornecedor = new javax.swing.JTextField();
+        txtCnpjFornecedor = new javax.swing.JTextField();
         txtIdFornecedor = new javax.swing.JTextField();
         btnCancelar = new javax.swing.JToggleButton();
         btnVerificar = new javax.swing.JToggleButton();
@@ -40,7 +53,7 @@ public class frmCadastroFornecedorPAINEL extends javax.swing.JPanel {
         btnExcluir = new javax.swing.JToggleButton();
         btnCarregar = new javax.swing.JToggleButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelaFornecedor = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtLocalidadeFornecedor = new javax.swing.JTextField();
@@ -72,32 +85,62 @@ public class frmCadastroFornecedorPAINEL extends javax.swing.JPanel {
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("Cancelar");
         btnCancelar.setPreferredSize(new java.awt.Dimension(86, 23));
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         btnVerificar.setBackground(new java.awt.Color(25, 89, 163));
         btnVerificar.setForeground(new java.awt.Color(255, 255, 255));
         btnVerificar.setText("Verificar");
         btnVerificar.setPreferredSize(new java.awt.Dimension(86, 23));
+        btnVerificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerificarActionPerformed(evt);
+            }
+        });
 
         btnCadastrar.setBackground(new java.awt.Color(25, 89, 163));
         btnCadastrar.setForeground(new java.awt.Color(255, 255, 255));
         btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
 
         btnAlterar.setBackground(new java.awt.Color(25, 89, 163));
         btnAlterar.setForeground(new java.awt.Color(255, 255, 255));
         btnAlterar.setText("Alterar");
         btnAlterar.setPreferredSize(new java.awt.Dimension(86, 23));
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setBackground(new java.awt.Color(25, 89, 163));
         btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
         btnExcluir.setText("Excluir");
         btnExcluir.setPreferredSize(new java.awt.Dimension(86, 23));
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btnCarregar.setBackground(new java.awt.Color(25, 89, 163));
         btnCarregar.setForeground(new java.awt.Color(255, 255, 255));
         btnCarregar.setText("Carregar");
         btnCarregar.setPreferredSize(new java.awt.Dimension(86, 23));
+        btnCarregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCarregarActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaFornecedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -108,7 +151,7 @@ public class frmCadastroFornecedorPAINEL extends javax.swing.JPanel {
                 "ID", "Nome", "CPNJ", "Telefone", "Localidade"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabelaFornecedor);
 
         jLabel5.setFont(new java.awt.Font("Noto Sans Mono CJK HK", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(25, 89, 163));
@@ -146,7 +189,7 @@ public class frmCadastroFornecedorPAINEL extends javax.swing.JPanel {
                                 .addComponent(btnCadastrar))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtCpnjFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                                    .addComponent(txtCnpjFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
                                     .addComponent(txtNomeFornecedor))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,7 +221,7 @@ public class frmCadastroFornecedorPAINEL extends javax.swing.JPanel {
                     .addComponent(txtTelefoneFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCpnjFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCnpjFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel6)
                     .addComponent(txtLocalidadeFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -198,6 +241,36 @@ public class frmCadastroFornecedorPAINEL extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+       LimparCampos();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed
+       listarValores();
+    }//GEN-LAST:event_btnVerificarActionPerformed
+
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        CadastrarFornecedor();
+        listarValores();
+        LimparCampos();
+    }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        AlterarFornecedor();
+        listarValores();
+        LimparCampos();
+    }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        ExcluirFornecedor();
+        listarValores();
+        LimparCampos();
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnCarregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarregarActionPerformed
+        CarregarCampos();
+    }//GEN-LAST:event_btnCarregarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnAlterar;
@@ -213,11 +286,117 @@ public class frmCadastroFornecedorPAINEL extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField txtCpnjFornecedor;
+    private javax.swing.JTable tabelaFornecedor;
+    private javax.swing.JTextField txtCnpjFornecedor;
     private javax.swing.JTextField txtIdFornecedor;
     private javax.swing.JTextField txtLocalidadeFornecedor;
     private javax.swing.JTextField txtNomeFornecedor;
     private javax.swing.JTextField txtTelefoneFornecedor;
     // End of variables declaration//GEN-END:variables
+    
+    private void listarValores() {
+
+        try {
+            FornecedorDAO objfornecedordao = new FornecedorDAO();
+            DefaultTableModel model = (DefaultTableModel) tabelaFornecedor.getModel();
+            model.setNumRows(0);
+
+            ArrayList<FornecedorDTO> lista = objfornecedordao.ListarFornecedor();
+
+            for (int num = 0; num < lista.size(); num++) {
+                model.addRow(new Object[]{
+                    lista.get(num).getId_fornecedor(),
+                    lista.get(num).getNome_fornecedor(),
+                    lista.get(num).getCnpj_fornecedor(),
+                    lista.get(num).getTelefone_fornecedor(),
+                    lista.get(num).getLocalidade_fornecedor()
+                });
+            }
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Listar Valores VIEW: " + erro);
+        }
+    }
+
+    private void LimparCampos() {
+        txtCnpjFornecedor.setText("");
+        txtNomeFornecedor.setText("");
+        txtTelefoneFornecedor.setText("");
+        txtLocalidadeFornecedor.setText("");
+        txtNomeFornecedor.requestFocus();
+    }
+
+    private void CarregarCampos() {
+        int setar = tabelaFornecedor.getSelectedRow();
+
+        txtIdFornecedor.setText(tabelaFornecedor.getModel().getValueAt(setar, 0).toString());
+        txtNomeFornecedor.setText(tabelaFornecedor.getModel().getValueAt(setar, 1).toString());
+        txtCnpjFornecedor.setText(tabelaFornecedor.getModel().getValueAt(setar, 2).toString());
+        txtTelefoneFornecedor.setText(tabelaFornecedor.getModel().getValueAt(setar, 3).toString());
+        txtLocalidadeFornecedor.setText(tabelaFornecedor.getModel().getValueAt(setar, 4).toString());
+        
+    }
+    
+    private void AlterarFornecedor() {
+        int id_fornecedor;
+        String nomeFornecedor, cnpjFornecedor, telefoneFornecedor, localidadeFornecedor;
+
+        id_fornecedor = Integer.parseInt(txtIdFornecedor.getText());
+        nomeFornecedor = txtNomeFornecedor.getText();
+        cnpjFornecedor = txtCnpjFornecedor.getText();
+        telefoneFornecedor = txtTelefoneFornecedor.getText();
+        localidadeFornecedor = txtLocalidadeFornecedor.getText();
+        
+        FornecedorDTO objfornecedordto = new FornecedorDTO();
+        objfornecedordto.setId_fornecedor(id_fornecedor);
+        objfornecedordto.setNome_fornecedor(nomeFornecedor);
+        objfornecedordto.setCnpj_fornecedor(cnpjFornecedor);
+        objfornecedordto.setTelefone_fornecedor(telefoneFornecedor);
+        objfornecedordto.setLocalidade_fornecedor(localidadeFornecedor);
+       
+
+        FornecedorDAO objfornecedordao = new FornecedorDAO();
+        objfornecedordao.alterarFornecedor(objfornecedordto);
+
+    }
+
+    private void CadastrarFornecedor() {
+        String nomeFornecedor, cnpjFornecedor, telefoneFornecedor, localidadeFornecedor;
+
+        nomeFornecedor = txtNomeFornecedor.getText();
+        cnpjFornecedor = txtCnpjFornecedor.getText();
+        telefoneFornecedor = txtTelefoneFornecedor.getText();
+        localidadeFornecedor = txtLocalidadeFornecedor.getText();
+
+        FornecedorDTO objfornecedordto = new FornecedorDTO();
+        objfornecedordto.setNome_fornecedor(nomeFornecedor);
+        objfornecedordto.setCnpj_fornecedor(cnpjFornecedor);
+        objfornecedordto.setTelefone_fornecedor(telefoneFornecedor);
+        objfornecedordto.setLocalidade_fornecedor(localidadeFornecedor);
+
+        FornecedorDAO objfornecedordao = new FornecedorDAO();
+        objfornecedordao.cadastrarFornecedor(objfornecedordto);
+    }
+    
+     private void ExcluirFornecedor() {
+        int id_fornecedor;
+        String nomeFornecedor, cnpjFornecedor, telefoneFornecedor, localidadeFornecedor;
+
+        id_fornecedor = Integer.parseInt(txtIdFornecedor.getText());
+        nomeFornecedor = txtNomeFornecedor.getText();
+        cnpjFornecedor = txtCnpjFornecedor.getText();
+        telefoneFornecedor = txtTelefoneFornecedor.getText();
+        localidadeFornecedor = txtLocalidadeFornecedor.getText();
+
+        FornecedorDTO objfornecedordto = new FornecedorDTO();
+        objfornecedordto.setId_fornecedor(id_fornecedor);
+        objfornecedordto.setNome_fornecedor(nomeFornecedor);
+        objfornecedordto.setCnpj_fornecedor(cnpjFornecedor);
+        objfornecedordto.setTelefone_fornecedor(telefoneFornecedor);
+        objfornecedordto.setLocalidade_fornecedor(localidadeFornecedor);
+
+        FornecedorDAO objfornecedordao = new FornecedorDAO();
+        objfornecedordao.excluirFornecedor(objfornecedordto);
+    }
+
+
 }

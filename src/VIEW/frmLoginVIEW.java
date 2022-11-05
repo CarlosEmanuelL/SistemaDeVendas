@@ -27,7 +27,7 @@ public class frmLoginVIEW extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtNomeUsuario = new javax.swing.JTextField();
+        txtUsuarioUsuario = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtSenhaUsuario = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
@@ -49,12 +49,12 @@ public class frmLoginVIEW extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(25, 89, 163));
         jLabel2.setText("Faça login para continuar");
 
-        txtNomeUsuario.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
-        txtNomeUsuario.setForeground(new java.awt.Color(165, 165, 165));
-        txtNomeUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtNomeUsuario.addActionListener(new java.awt.event.ActionListener() {
+        txtUsuarioUsuario.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        txtUsuarioUsuario.setForeground(new java.awt.Color(165, 165, 165));
+        txtUsuarioUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtUsuarioUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNomeUsuarioActionPerformed(evt);
+                txtUsuarioUsuarioActionPerformed(evt);
             }
         });
 
@@ -96,7 +96,7 @@ public class frmLoginVIEW extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtUsuarioUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -114,7 +114,7 @@ public class frmLoginVIEW extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(42, 42, 42)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtUsuarioUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,9 +165,9 @@ public class frmLoginVIEW extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNomeUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeUsuarioActionPerformed
+    private void txtUsuarioUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioUsuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNomeUsuarioActionPerformed
+    }//GEN-LAST:event_txtUsuarioUsuarioActionPerformed
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         // TODO add your handling code here:
@@ -218,19 +218,19 @@ public class frmLoginVIEW extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField txtNomeUsuario;
     private javax.swing.JPasswordField txtSenhaUsuario;
+    private javax.swing.JTextField txtUsuarioUsuario;
     // End of variables declaration//GEN-END:variables
 
     private void Logar() {
         try {
-            String nome_usuario, senha_usuario;
+            String usuario_usuario, senha_usuario;
 
-            nome_usuario = txtNomeUsuario.getText();
+            usuario_usuario = txtUsuarioUsuario.getText();
             senha_usuario = txtSenhaUsuario.getText();
 
             UsuarioDTO objusuariodto = new UsuarioDTO();
-            objusuariodto.setNome_usuario(nome_usuario);
+            objusuariodto.setUsuario_usuario(usuario_usuario);
             objusuariodto.setSenha_usuario(senha_usuario);
 
             UsuarioDAO objusuariodao = new UsuarioDAO();

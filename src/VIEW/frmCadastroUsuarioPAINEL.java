@@ -4,6 +4,18 @@
  */
 package VIEW;
 
+import DAO.ConexaoDAO;
+import DAO.UsuarioDAO;
+import DTO.UsuarioDTO;
+
+import java.sql.PreparedStatement;
+import java.sql.Connection;
+import java.util.Vector;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author carlos
@@ -15,6 +27,7 @@ public class frmCadastroUsuarioPAINEL extends javax.swing.JPanel {
      */
     public frmCadastroUsuarioPAINEL() {
         initComponents();
+        listarValores();
     }
 
     /**
@@ -29,18 +42,18 @@ public class frmCadastroUsuarioPAINEL extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtUsuarioUsuario = new javax.swing.JTextField();
+        txtSenhaUsuario = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelaUsuario = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        txtNomeUsuario = new javax.swing.JTextField();
+        txtEmailUsuario = new javax.swing.JTextField();
+        txtMatriculaUsuario = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        txtIdUsuario = new javax.swing.JTextField();
         btnCancelar = new javax.swing.JToggleButton();
         btnVerificar = new javax.swing.JToggleButton();
         btnCadastrar = new javax.swing.JToggleButton();
@@ -65,13 +78,13 @@ public class frmCadastroUsuarioPAINEL extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(25, 89, 163));
         jLabel3.setText("Senha:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtUsuarioUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtUsuarioUsuarioActionPerformed(evt);
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -79,10 +92,10 @@ public class frmCadastroUsuarioPAINEL extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nome", "Matrícula", "Email", "Usuário", "Senha"
+                "ID", "Usuário", "Senha", "Nome", "Matrícula", "Email"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabelaUsuario);
 
         jLabel4.setFont(new java.awt.Font("Noto Sans Mono CJK HK", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(25, 89, 163));
@@ -96,9 +109,9 @@ public class frmCadastroUsuarioPAINEL extends javax.swing.JPanel {
         jLabel6.setForeground(new java.awt.Color(25, 89, 163));
         jLabel6.setText("Email:");
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        txtNomeUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                txtNomeUsuarioActionPerformed(evt);
             }
         });
 
@@ -106,36 +119,66 @@ public class frmCadastroUsuarioPAINEL extends javax.swing.JPanel {
         jLabel7.setForeground(new java.awt.Color(25, 89, 163));
         jLabel7.setText("ID Usuário");
 
-        jTextField6.setEnabled(false);
+        txtIdUsuario.setEnabled(false);
 
         btnCancelar.setBackground(new java.awt.Color(25, 89, 163));
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("Cancelar");
         btnCancelar.setPreferredSize(new java.awt.Dimension(86, 23));
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         btnVerificar.setBackground(new java.awt.Color(25, 89, 163));
         btnVerificar.setForeground(new java.awt.Color(255, 255, 255));
         btnVerificar.setText("Verificar");
         btnVerificar.setPreferredSize(new java.awt.Dimension(86, 23));
+        btnVerificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerificarActionPerformed(evt);
+            }
+        });
 
         btnCadastrar.setBackground(new java.awt.Color(25, 89, 163));
         btnCadastrar.setForeground(new java.awt.Color(255, 255, 255));
         btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
 
         btnAlterar.setBackground(new java.awt.Color(25, 89, 163));
         btnAlterar.setForeground(new java.awt.Color(255, 255, 255));
         btnAlterar.setText("Alterar");
         btnAlterar.setPreferredSize(new java.awt.Dimension(86, 23));
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setBackground(new java.awt.Color(25, 89, 163));
         btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
         btnExcluir.setText("Excluir");
         btnExcluir.setPreferredSize(new java.awt.Dimension(86, 23));
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btnCarregar.setBackground(new java.awt.Color(25, 89, 163));
         btnCarregar.setForeground(new java.awt.Color(255, 255, 255));
         btnCarregar.setText("Carregar");
         btnCarregar.setPreferredSize(new java.awt.Dimension(86, 23));
+        btnCarregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCarregarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -157,7 +200,7 @@ public class frmCadastroUsuarioPAINEL extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel5))
                             .addGroup(layout.createSequentialGroup()
@@ -166,18 +209,18 @@ public class frmCadastroUsuarioPAINEL extends javax.swing.JPanel {
                                     .addComponent(jLabel3))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField1)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtUsuarioUsuario)
+                                    .addComponent(txtSenhaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(50, 50, 50)
                                 .addComponent(jLabel6)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField4)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtEmailUsuario)
+                            .addComponent(txtMatriculaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtIdUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -200,45 +243,75 @@ public class frmCadastroUsuarioPAINEL extends javax.swing.JPanel {
                 .addGap(52, 52, 52)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMatriculaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel6)
                         .addComponent(jLabel2)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtUsuarioUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEmailUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSenhaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnVerificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnCadastrar)
                             .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCarregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnCarregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtIdUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(56, 56, 56))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtUsuarioUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioUsuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtUsuarioUsuarioActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void txtNomeUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeUsuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_txtNomeUsuarioActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        LimparCampos();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed
+        listarValores();
+    }//GEN-LAST:event_btnVerificarActionPerformed
+
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        CadastrarUsuario();
+        listarValores();
+        LimparCampos();
+    }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        AlterarUsuario();
+        listarValores();
+        LimparCampos();
+    }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        ExcluirUsuario();
+        listarValores();
+        LimparCampos();
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnCarregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarregarActionPerformed
+        CarregarCampos();
+    }//GEN-LAST:event_btnCarregarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -256,12 +329,127 @@ public class frmCadastroUsuarioPAINEL extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTable tabelaUsuario;
+    private javax.swing.JTextField txtEmailUsuario;
+    private javax.swing.JTextField txtIdUsuario;
+    private javax.swing.JTextField txtMatriculaUsuario;
+    private javax.swing.JTextField txtNomeUsuario;
+    private javax.swing.JTextField txtSenhaUsuario;
+    private javax.swing.JTextField txtUsuarioUsuario;
     // End of variables declaration//GEN-END:variables
+
+     private void listarValores() {
+
+        try {
+            UsuarioDAO objusuariodao = new UsuarioDAO();
+            DefaultTableModel model = (DefaultTableModel) tabelaUsuario.getModel();
+            model.setNumRows(0);
+
+            ArrayList<UsuarioDTO> lista = objusuariodao.ListarUsuario();
+
+            for (int num = 0; num < lista.size(); num++) {
+                model.addRow(new Object[]{
+                    lista.get(num).getId_usuario(),
+                    lista.get(num).getUsuario_usuario(),
+                    lista.get(num).getSenha_usuario(),
+                    lista.get(num).getNome_usuario(),
+                    lista.get(num).getMatricula_usuario(),
+                    lista.get(num).getEmail_usuario()
+                });
+            }
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Listar Valores VIEW: " + erro);
+        }
+    }
+
+    private void LimparCampos() {
+        txtUsuarioUsuario.setText("");
+        txtSenhaUsuario.setText("");
+        txtNomeUsuario.setText("");
+        txtMatriculaUsuario.setText("");
+        txtEmailUsuario.setText("");
+        txtUsuarioUsuario.requestFocus();
+    }
+
+    private void CarregarCampos() {
+        int setar = tabelaUsuario.getSelectedRow();
+
+        txtIdUsuario.setText(tabelaUsuario.getModel().getValueAt(setar, 0).toString());
+        txtUsuarioUsuario.setText(tabelaUsuario.getModel().getValueAt(setar, 1).toString());
+        txtSenhaUsuario.setText(tabelaUsuario.getModel().getValueAt(setar, 2).toString());
+        txtNomeUsuario.setText(tabelaUsuario.getModel().getValueAt(setar, 3).toString());
+        txtMatriculaUsuario.setText(tabelaUsuario.getModel().getValueAt(setar, 4).toString());
+        txtEmailUsuario.setText(tabelaUsuario.getModel().getValueAt(setar, 5).toString());
+        
+    }
+    
+    private void AlterarUsuario() {
+        int id_usuario;
+        String usuarioUsuario, senhaUsuario, nomeUsuario, matriculaUsuario, emailUsuario;
+
+        id_usuario = Integer.parseInt(txtIdUsuario.getText());
+        usuarioUsuario = txtUsuarioUsuario.getText();
+        senhaUsuario = txtSenhaUsuario.getText();
+        nomeUsuario = txtNomeUsuario.getText();
+        matriculaUsuario = txtMatriculaUsuario.getText();
+        emailUsuario = txtEmailUsuario.getText();
+        
+        UsuarioDTO objusuariodto = new UsuarioDTO();
+        objusuariodto.setId_usuario(id_usuario);
+        objusuariodto.setUsuario_usuario(usuarioUsuario);
+        objusuariodto.setSenha_usuario(senhaUsuario);
+        objusuariodto.setNome_usuario(nomeUsuario);
+        objusuariodto.setMatricula_usuario(matriculaUsuario);
+        objusuariodto.setEmail_usuario(emailUsuario);
+       
+
+        UsuarioDAO objusuariodao = new UsuarioDAO();
+        objusuariodao.alterarUsuario(objusuariodto);
+
+    }
+
+    private void CadastrarUsuario() {
+        String usuarioUsuario, senhaUsuario, nomeUsuario, matriculaUsuario, emailUsuario;
+
+        usuarioUsuario = txtUsuarioUsuario.getText();
+        senhaUsuario = txtSenhaUsuario.getText();
+        nomeUsuario = txtNomeUsuario.getText();
+        matriculaUsuario = txtMatriculaUsuario.getText();
+        emailUsuario = txtEmailUsuario.getText();
+
+        UsuarioDTO objusuariodto = new UsuarioDTO();
+        objusuariodto.setUsuario_usuario(usuarioUsuario);
+        objusuariodto.setSenha_usuario(senhaUsuario);
+        objusuariodto.setNome_usuario(nomeUsuario);
+        objusuariodto.setMatricula_usuario(matriculaUsuario);
+        objusuariodto.setEmail_usuario(emailUsuario);
+
+        UsuarioDAO objusuariodao = new UsuarioDAO();
+        objusuariodao.cadastrarUsuario(objusuariodto);
+    }
+    
+     private void ExcluirUsuario() {
+        int id_usuario;
+        String usuarioUsuario, senhaUsuario, nomeUsuario, matriculaUsuario, emailUsuario;
+
+        id_usuario = Integer.parseInt(txtIdUsuario.getText());
+        usuarioUsuario = txtUsuarioUsuario.getText();
+        senhaUsuario = txtSenhaUsuario.getText();
+        nomeUsuario = txtNomeUsuario.getText();
+        matriculaUsuario = txtMatriculaUsuario.getText();
+        emailUsuario = txtEmailUsuario.getText();
+
+         UsuarioDTO objusuariodto = new UsuarioDTO();
+        objusuariodto.setId_usuario(id_usuario);
+        objusuariodto.setUsuario_usuario(usuarioUsuario);
+        objusuariodto.setSenha_usuario(senhaUsuario);
+        objusuariodto.setNome_usuario(nomeUsuario);
+        objusuariodto.setMatricula_usuario(matriculaUsuario);
+        objusuariodto.setEmail_usuario(emailUsuario);
+
+        UsuarioDAO objusuariodao = new UsuarioDAO();
+        objusuariodao.excluirUsuario(objusuariodto);
+    }
+
+
 }

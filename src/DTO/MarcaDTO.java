@@ -10,7 +10,7 @@ package DTO;
  */
 public class MarcaDTO {
     private int id_marca;
-    private String nome_marca;
+    private String nome_marca, codigo_marca;
 
     public int getId_marca() {
         return id_marca;
@@ -26,5 +26,13 @@ public class MarcaDTO {
 
     public void setNome_marca(String nome_marca) {
         this.nome_marca = nome_marca;
+    }
+
+    public String getCodigo_marca() {
+        return codigo_marca;
+    }
+
+    public void setCodigo_marca(String codigo_marca) {
+        this.codigo_marca = codigo_marca;
     }
 }

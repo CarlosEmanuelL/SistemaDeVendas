@@ -4,6 +4,19 @@
  */
 package VIEW;
 
+import DAO.ConexaoDAO;
+import DAO.MarcaDAO;
+import DTO.MarcaDTO;
+
+import java.sql.PreparedStatement;
+import java.sql.Connection;
+import java.util.Vector;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author carlos
@@ -15,6 +28,7 @@ public class frmCadastroMarcaPAINEL extends javax.swing.JPanel {
      */
     public frmCadastroMarcaPAINEL() {
         initComponents();
+        listarValores();
     }
 
     /**
@@ -30,7 +44,7 @@ public class frmCadastroMarcaPAINEL extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelaMarca = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         txtNomeMarca = new javax.swing.JTextField();
         txtCodigoMarca = new javax.swing.JTextField();
@@ -58,7 +72,7 @@ public class frmCadastroMarcaPAINEL extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(25, 89, 163));
         jLabel3.setText("Código:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaMarca.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -69,7 +83,7 @@ public class frmCadastroMarcaPAINEL extends javax.swing.JPanel {
                 "ID", "Nome", "Código"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabelaMarca);
 
         jLabel4.setFont(new java.awt.Font("Noto Sans Mono CJK HK", 1, 13)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(25, 89, 163));
@@ -81,30 +95,60 @@ public class frmCadastroMarcaPAINEL extends javax.swing.JPanel {
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("Cancelar");
         btnCancelar.setPreferredSize(new java.awt.Dimension(86, 23));
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         btnVerificar.setBackground(new java.awt.Color(25, 89, 163));
         btnVerificar.setForeground(new java.awt.Color(255, 255, 255));
         btnVerificar.setText("Verificar");
         btnVerificar.setPreferredSize(new java.awt.Dimension(86, 23));
+        btnVerificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerificarActionPerformed(evt);
+            }
+        });
 
         btnCadastrar.setBackground(new java.awt.Color(25, 89, 163));
         btnCadastrar.setForeground(new java.awt.Color(255, 255, 255));
         btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
 
         btnAlterar.setBackground(new java.awt.Color(25, 89, 163));
         btnAlterar.setForeground(new java.awt.Color(255, 255, 255));
         btnAlterar.setText("Alterar");
         btnAlterar.setPreferredSize(new java.awt.Dimension(86, 23));
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setBackground(new java.awt.Color(25, 89, 163));
         btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
         btnExcluir.setText("Excluir");
         btnExcluir.setPreferredSize(new java.awt.Dimension(86, 23));
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btnCarregar.setBackground(new java.awt.Color(25, 89, 163));
         btnCarregar.setForeground(new java.awt.Color(255, 255, 255));
         btnCarregar.setText("Carregar");
         btnCarregar.setPreferredSize(new java.awt.Dimension(86, 23));
+        btnCarregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCarregarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -176,6 +220,36 @@ public class frmCadastroMarcaPAINEL extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        CadastrarMarca();
+        listarValores();
+        LimparCampos();
+    }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        LimparCampos();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed
+        listarValores();
+    }//GEN-LAST:event_btnVerificarActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        AlterarMarca();
+        listarValores();
+        LimparCampos();
+    }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        ExcluirMarca();
+        listarValores();
+        LimparCampos();
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnCarregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarregarActionPerformed
+        CarregarCampos();
+    }//GEN-LAST:event_btnCarregarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnAlterar;
@@ -189,9 +263,96 @@ public class frmCadastroMarcaPAINEL extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tabelaMarca;
     private javax.swing.JTextField txtCodigoMarca;
     private javax.swing.JTextField txtIdMarca;
     private javax.swing.JTextField txtNomeMarca;
     // End of variables declaration//GEN-END:variables
+
+    private void listarValores() {
+
+        try {
+            MarcaDAO objmarcadao = new MarcaDAO();
+            DefaultTableModel model = (DefaultTableModel) tabelaMarca.getModel();
+            model.setNumRows(0);
+
+            ArrayList<MarcaDTO> lista = objmarcadao.ListarMarca();
+
+            for (int num = 0; num < lista.size(); num++) {
+                model.addRow(new Object[]{
+                    lista.get(num).getId_marca(),
+                    lista.get(num).getNome_marca(),
+                    lista.get(num).getCodigo_marca()
+                });
+            }
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Listar Valores VIEW: " + erro);
+        }
+    }
+
+    private void LimparCampos() {
+        txtCodigoMarca.setText("");
+        txtNomeMarca.setText("");
+        txtNomeMarca.requestFocus();
+    }
+
+    private void CarregarCampos() {
+        int setar = tabelaMarca.getSelectedRow();
+
+        txtIdMarca.setText(tabelaMarca.getModel().getValueAt(setar, 0).toString());
+        txtNomeMarca.setText(tabelaMarca.getModel().getValueAt(setar, 1).toString());
+        txtCodigoMarca.setText(tabelaMarca.getModel().getValueAt(setar, 2).toString());
+        
+    }
+    
+    private void AlterarMarca() {
+        int id_marca;
+        String nomeMarca, codigoMarca;
+
+        id_marca = Integer.parseInt(txtIdMarca.getText());
+        nomeMarca = txtNomeMarca.getText();
+        codigoMarca = txtCodigoMarca.getText();
+        
+        MarcaDTO objmarcadto = new MarcaDTO();
+        objmarcadto.setId_marca(id_marca);
+        objmarcadto.setNome_marca(nomeMarca);
+        objmarcadto.setCodigo_marca(codigoMarca);
+       
+
+        MarcaDAO objmarcadao = new MarcaDAO();
+        objmarcadao.alterarMarca(objmarcadto);
+
+    }
+
+    private void CadastrarMarca() {
+        String nomeMarca, codigoMarca;
+
+        nomeMarca = txtNomeMarca.getText();
+        codigoMarca = txtCodigoMarca.getText();
+
+        MarcaDTO objmarcadto = new MarcaDTO();
+        objmarcadto.setNome_marca(nomeMarca);
+        objmarcadto.setCodigo_marca(codigoMarca);
+
+        MarcaDAO objmarcadao = new MarcaDAO();
+        objmarcadao.cadastrarMarca(objmarcadto);
+    }
+    
+     private void ExcluirMarca() {
+        int id_marca;
+        String nomeMarca, codigoMarca;
+
+        id_marca = Integer.parseInt(txtIdMarca.getText());
+        nomeMarca = txtNomeMarca.getText();
+        codigoMarca = txtCodigoMarca.getText();
+
+        MarcaDTO objmarcadto = new MarcaDTO();
+        objmarcadto.setId_marca(id_marca);
+        objmarcadto.setNome_marca(nomeMarca);
+        objmarcadto.setCodigo_marca(codigoMarca);
+
+        MarcaDAO objmarcadao = new MarcaDAO();
+        objmarcadao.excluirMarca(objmarcadto);
+    }
+
 }
