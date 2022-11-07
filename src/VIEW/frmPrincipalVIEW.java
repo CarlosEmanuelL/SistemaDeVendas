@@ -50,6 +50,9 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         painelCentral = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -146,6 +149,18 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Noto Sans Mono CJK HK", 1, 15)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Usuário:");
+
+        jLabel2.setFont(new java.awt.Font("Noto Sans Mono CJK HK", 1, 15)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Data:");
+
+        jLabel3.setFont(new java.awt.Font("Noto Sans Mono CJK HK", 1, 15)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Horário:");
+
         javax.swing.GroupLayout painelMenuLayout = new javax.swing.GroupLayout(painelMenu);
         painelMenu.setLayout(painelMenuLayout);
         painelMenuLayout.setHorizontalGroup(
@@ -162,12 +177,16 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(painelMenuLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(painelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jSeparator1)
-                    .addGroup(painelMenuLayout.createSequentialGroup()
-                        .addComponent(logoIMG)
-                        .addGap(18, 18, 18)
-                        .addComponent(logoLabel)))
+                .addGroup(painelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel1)
+                    .addGroup(painelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jSeparator1)
+                        .addGroup(painelMenuLayout.createSequentialGroup()
+                            .addComponent(logoIMG)
+                            .addGap(18, 18, 18)
+                            .addComponent(logoLabel))))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         painelMenuLayout.setVerticalGroup(
@@ -194,7 +213,13 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(219, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addGap(17, 17, 17))
         );
 
         painelCentral.setBackground(new java.awt.Color(255, 255, 255));
@@ -298,6 +323,9 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel logoIMG;
     private javax.swing.JLabel logoLabel;
