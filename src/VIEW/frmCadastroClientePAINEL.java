@@ -4,6 +4,19 @@
  */
 package VIEW;
 
+import DAO.ConexaoDAO;
+import DAO.ClienteDAO;
+import DTO.ClienteDTO;
+
+import java.sql.PreparedStatement;
+import java.sql.Connection;
+import java.util.Vector;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author carlos
@@ -36,7 +49,7 @@ public class frmCadastroClientePAINEL extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         txtCepCliente = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelaCliente = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
         txtIdCliente = new javax.swing.JTextField();
         btnCancelar = new javax.swing.JToggleButton();
@@ -76,7 +89,7 @@ public class frmCadastroClientePAINEL extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(25, 89, 163));
         jLabel5.setText("CEP:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -87,7 +100,7 @@ public class frmCadastroClientePAINEL extends javax.swing.JPanel {
                 "ID", "Nome", "Endereço", "Telefone", "CEP"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabelaCliente);
 
         jLabel6.setFont(new java.awt.Font("Noto Sans Mono CJK HK", 1, 13)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(25, 89, 163));
@@ -99,30 +112,60 @@ public class frmCadastroClientePAINEL extends javax.swing.JPanel {
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("Cancelar");
         btnCancelar.setPreferredSize(new java.awt.Dimension(86, 23));
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         btnVerificar.setBackground(new java.awt.Color(25, 89, 163));
         btnVerificar.setForeground(new java.awt.Color(255, 255, 255));
         btnVerificar.setText("Verificar");
         btnVerificar.setPreferredSize(new java.awt.Dimension(86, 23));
+        btnVerificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerificarActionPerformed(evt);
+            }
+        });
 
         btnCadastrar.setBackground(new java.awt.Color(25, 89, 163));
         btnCadastrar.setForeground(new java.awt.Color(255, 255, 255));
         btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
 
         btnAlterar.setBackground(new java.awt.Color(25, 89, 163));
         btnAlterar.setForeground(new java.awt.Color(255, 255, 255));
         btnAlterar.setText("Alterar");
         btnAlterar.setPreferredSize(new java.awt.Dimension(86, 23));
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setBackground(new java.awt.Color(25, 89, 163));
         btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
         btnExcluir.setText("Excluir");
         btnExcluir.setPreferredSize(new java.awt.Dimension(86, 23));
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btnCarregar.setBackground(new java.awt.Color(25, 89, 163));
         btnCarregar.setForeground(new java.awt.Color(255, 255, 255));
         btnCarregar.setText("Carregar");
         btnCarregar.setPreferredSize(new java.awt.Dimension(86, 23));
+        btnCarregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCarregarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -211,6 +254,36 @@ public class frmCadastroClientePAINEL extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTelefoneClienteActionPerformed
 
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        LimparCampos();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed
+        listarValores();
+    }//GEN-LAST:event_btnVerificarActionPerformed
+
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        CadastrarCliente();
+        listarValores();
+        LimparCampos();
+    }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        AlterarCliente();
+        listarValores();
+        LimparCampos();
+    }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        ExcluirCliente();
+        listarValores();
+        LimparCampos();
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnCarregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarregarActionPerformed
+        CarregarCampos();
+    }//GEN-LAST:event_btnCarregarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnAlterar;
@@ -226,11 +299,116 @@ public class frmCadastroClientePAINEL extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tabelaCliente;
     private javax.swing.JTextField txtCepCliente;
     private javax.swing.JTextField txtEnderecoCliente;
     private javax.swing.JTextField txtIdCliente;
     private javax.swing.JTextField txtNomeCliente;
     private javax.swing.JTextField txtTelefoneCliente;
     // End of variables declaration//GEN-END:variables
+
+    private void listarValores() {
+
+        try {
+            ClienteDAO objclientedao = new ClienteDAO();
+            DefaultTableModel model = (DefaultTableModel) tabelaCliente.getModel();
+            model.setNumRows(0);
+
+            ArrayList<ClienteDTO> lista = objclientedao.ListarCliente();
+
+            for (int num = 0; num < lista.size(); num++) {
+                model.addRow(new Object[]{
+                    lista.get(num).getId_cliente(),
+                    lista.get(num).getNome_cliente(),
+                    lista.get(num).getEndereco_cliente(),
+                    lista.get(num).getTelefone_cliente(),
+                    lista.get(num).getCep_cliente()
+                });
+            }
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Listar Valores VIEW: " + erro);
+        }
+    }
+
+    private void LimparCampos() {
+        txtNomeCliente.setText("");
+        txtEnderecoCliente.setText("");
+        txtTelefoneCliente.setText("");
+        txtCepCliente.setText("");
+        txtNomeCliente.requestFocus();
+    }
+
+    private void CarregarCampos() {
+        int setar = tabelaCliente.getSelectedRow();
+
+        txtIdCliente.setText(tabelaCliente.getModel().getValueAt(setar, 0).toString());
+        txtNomeCliente.setText(tabelaCliente.getModel().getValueAt(setar, 1).toString());
+        txtEnderecoCliente.setText(tabelaCliente.getModel().getValueAt(setar, 2).toString());
+        txtTelefoneCliente.setText(tabelaCliente.getModel().getValueAt(setar, 3).toString());
+        txtCepCliente.setText(tabelaCliente.getModel().getValueAt(setar, 4).toString());
+
+    }
+
+    private void AlterarCliente() {
+        int id_cliente;
+        String nomeCliente, enderecoCliente, telefoneCliente, cepCliente;
+
+        id_cliente = Integer.parseInt(txtIdCliente.getText());
+        nomeCliente = txtNomeCliente.getText();
+        enderecoCliente = txtEnderecoCliente.getText();
+        telefoneCliente = txtTelefoneCliente.getText();
+        cepCliente = txtCepCliente.getText();
+
+        ClienteDTO objclientedto = new ClienteDTO();
+        objclientedto.setId_cliente(id_cliente);
+        objclientedto.setNome_cliente(nomeCliente);
+        objclientedto.setEndereco_cliente(enderecoCliente);
+        objclientedto.setTelefone_cliente(telefoneCliente);
+        objclientedto.setCep_cliente(cepCliente);
+
+        ClienteDAO objclientedao = new ClienteDAO();
+        objclientedao.alterarCliente(objclientedto);
+
+    }
+
+    private void CadastrarCliente() {
+        String nomeCliente, enderecoCliente, telefoneCliente, cepCliente;
+
+        nomeCliente = txtNomeCliente.getText();
+        enderecoCliente = txtEnderecoCliente.getText();
+        telefoneCliente = txtTelefoneCliente.getText();
+        cepCliente = txtCepCliente.getText();
+
+        ClienteDTO objclientedto = new ClienteDTO();
+
+        objclientedto.setNome_cliente(nomeCliente);
+        objclientedto.setEndereco_cliente(enderecoCliente);
+        objclientedto.setTelefone_cliente(telefoneCliente);
+        objclientedto.setCep_cliente(cepCliente);
+
+        ClienteDAO objclientedao = new ClienteDAO();
+        objclientedao.cadastrarCliente(objclientedto);
+    }
+
+    private void ExcluirCliente() {
+        int id_cliente;
+        String nomeCliente, enderecoCliente, telefoneCliente, cepCliente;
+
+        id_cliente = Integer.parseInt(txtIdCliente.getText());
+        nomeCliente = txtNomeCliente.getText();
+        enderecoCliente = txtEnderecoCliente.getText();
+        telefoneCliente = txtTelefoneCliente.getText();
+        cepCliente = txtCepCliente.getText();
+
+        ClienteDTO objclientedto = new ClienteDTO();
+        objclientedto.setId_cliente(id_cliente);
+        objclientedto.setNome_cliente(nomeCliente);
+        objclientedto.setEndereco_cliente(enderecoCliente);
+        objclientedto.setTelefone_cliente(telefoneCliente);
+        objclientedto.setCep_cliente(cepCliente);
+
+        ClienteDAO objclientedao = new ClienteDAO();
+        objclientedao.excluirCliente(objclientedto);
+    }
+
 }
