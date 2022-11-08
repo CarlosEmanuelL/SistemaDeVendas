@@ -44,5 +44,5 @@ public class VendaCacheDTO {
     public void setValor_venda_cache(float valor_venda_cache) {
         this.valor_venda_cache = valor_venda_cache;
     }
-    
+
 }

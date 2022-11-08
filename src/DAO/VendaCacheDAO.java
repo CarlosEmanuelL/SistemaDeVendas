@@ -18,11 +18,12 @@ import java.sql.SQLException;
  * @author carlos
  */
 public class VendaCacheDAO {
+
     Connection conn;
     PreparedStatement pstm;
     ResultSet rs;
     ArrayList<VendaCacheDTO> lista = new ArrayList<>();
-    
+
     public void cadastrarVendaCache(VendaCacheDTO objvendacachedto) {
         String sql = "insert into venda_cache (produto_venda_cache, quantidade_venda_cache, preco_venda_cache) values (?,?,?)";
 
@@ -33,14 +34,14 @@ public class VendaCacheDAO {
             pstm.setString(1, objvendacachedto.getNome_produto_cache());
             pstm.setInt(2, objvendacachedto.getQuantidade_venda_cache());
             pstm.setFloat(3, objvendacachedto.getValor_venda_cache());
-            
+
             pstm.execute();
             pstm.close();
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "VendaCacheDAO Cadastrar: " + erro);
         }
     }
-    
+
     public ArrayList<VendaCacheDTO> ListarVendaCache() {
         String sql = "select * from venda_cache";
         conn = new ConexaoDAO().conectaBD();
@@ -64,7 +65,8 @@ public class VendaCacheDAO {
         }
         return lista;
     }
-    
+
+
     public void excluirVendaCache(VendaCacheDTO objvendacachedto) {
         String sql = "delete from venda_cache";
         conn = new ConexaoDAO().conectaBD();
@@ -78,5 +80,5 @@ public class VendaCacheDAO {
             JOptionPane.showMessageDialog(null, "DeletarDadosTabela VendaCacheDAO Excluir: " + erro);
         }
     }
-    
+
 }

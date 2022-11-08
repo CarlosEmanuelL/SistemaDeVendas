@@ -28,6 +28,7 @@ public class frmCadastroClientePAINEL extends javax.swing.JPanel {
      */
     public frmCadastroClientePAINEL() {
         initComponents();
+        listarValores();
     }
 
     /**

@@ -53,6 +53,9 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        lblUsuario = new javax.swing.JLabel();
+        lblData = new javax.swing.JLabel();
+        lblHorario = new javax.swing.JLabel();
         painelCentral = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -161,6 +164,18 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Horário:");
 
+        lblUsuario.setFont(new java.awt.Font("Noto Sans Mono CJK HK", 1, 15)); // NOI18N
+        lblUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        lblUsuario.setText("Usuário:");
+
+        lblData.setFont(new java.awt.Font("Noto Sans Mono CJK HK", 1, 15)); // NOI18N
+        lblData.setForeground(new java.awt.Color(255, 255, 255));
+        lblData.setText("Data:");
+
+        lblHorario.setFont(new java.awt.Font("Noto Sans Mono CJK HK", 1, 15)); // NOI18N
+        lblHorario.setForeground(new java.awt.Color(255, 255, 255));
+        lblHorario.setText("Horário:");
+
         javax.swing.GroupLayout painelMenuLayout = new javax.swing.GroupLayout(painelMenu);
         painelMenu.setLayout(painelMenuLayout);
         painelMenuLayout.setHorizontalGroup(
@@ -178,15 +193,24 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
             .addGroup(painelMenuLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(painelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel1)
+                    .addGroup(painelMenuLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblHorario))
                     .addGroup(painelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jSeparator1)
                         .addGroup(painelMenuLayout.createSequentialGroup()
                             .addComponent(logoIMG)
                             .addGap(18, 18, 18)
-                            .addComponent(logoLabel))))
+                            .addComponent(logoLabel)))
+                    .addGroup(painelMenuLayout.createSequentialGroup()
+                        .addGroup(painelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
+                        .addGroup(painelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblData)
+                            .addComponent(lblUsuario))))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         painelMenuLayout.setVerticalGroup(
@@ -214,11 +238,17 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addGroup(painelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(lblUsuario))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addGroup(painelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(lblData))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3)
+                .addGroup(painelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(lblHorario))
                 .addGap(17, 17, 17))
         );
 
@@ -327,9 +357,15 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblData;
+    private javax.swing.JLabel lblHorario;
+    private javax.swing.JLabel lblUsuario;
     private javax.swing.JLabel logoIMG;
     private javax.swing.JLabel logoLabel;
     private javax.swing.JPanel painelCentral;
     private javax.swing.JPanel painelMenu;
     // End of variables declaration//GEN-END:variables
+
+    
+
 }
