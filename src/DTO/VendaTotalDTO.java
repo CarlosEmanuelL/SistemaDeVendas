@@ -11,7 +11,7 @@ package DTO;
 public class VendaTotalDTO {
     private int id_venda;
     private String cliente_venda, forma_pagamento_venda;
-    private float desconto_venda, valor_pago_venda, total_produto_venda,total_venda;
+    private float desconto_venda, valor_pago_venda, total_produto_venda,total_venda, troco_venda;
 
     public int getId_venda() {
         return id_venda;
@@ -67,6 +67,14 @@ public class VendaTotalDTO {
 
     public void setTotal_produto_venda(float total_produto_venda) {
         this.total_produto_venda = total_produto_venda;
+    }
+
+    public float getTroco_venda() {
+        return troco_venda;
+    }
+
+    public void setTroco_venda(float troco_venda) {
+        this.troco_venda = troco_venda;
     }
 
   

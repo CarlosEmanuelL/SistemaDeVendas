@@ -34,7 +34,7 @@ public class VendaCacheDAO {
             pstm.setString(1, objvendacachedto.getNome_produto_cache());
             pstm.setInt(2, objvendacachedto.getQuantidade_venda_cache());
             pstm.setFloat(3, objvendacachedto.getValor_venda_cache());
-
+            
             pstm.execute();
             pstm.close();
         } catch (SQLException erro) {

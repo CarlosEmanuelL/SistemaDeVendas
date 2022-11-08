@@ -22,7 +22,7 @@ public class VendaTotalDAO {
     ArrayList<VendaTotalDTO> lista = new ArrayList<>();
     
      public void cadastrarVendaTotal(VendaTotalDTO objvendatotaldto) {
-        String sql = "insert into venda (cliente_venda, desconto_venda, forma_pagamento_venda, valor_pago_venda, total_produto_venda, total_venda) values (?,?,?,?,?,?)";
+        String sql = "insert into venda (cliente_venda, desconto_venda, forma_pagamento_venda, valor_pago_venda, total_produto_venda, total_venda, troco_venda) values (?,?,?,?,?,?,?)";
 
         conn = new ConexaoDAO().conectaBD();
 
@@ -34,6 +34,7 @@ public class VendaTotalDAO {
             pstm.setFloat(4, objvendatotaldto.getValor_pago_venda());
             pstm.setFloat(5, objvendatotaldto.getTotal_produto_venda());
             pstm.setFloat(6, objvendatotaldto.getTotal_venda());
+            pstm.setFloat(7, objvendatotaldto.getTroco_venda());
 
             pstm.execute();
             pstm.close();
