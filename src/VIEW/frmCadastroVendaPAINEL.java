@@ -215,6 +215,11 @@ public class frmCadastroVendaPAINEL extends javax.swing.JPanel {
         btnFinalizarVenda.setFont(new java.awt.Font("Noto Sans Mono CJK HK", 1, 15)); // NOI18N
         btnFinalizarVenda.setForeground(new java.awt.Color(255, 255, 255));
         btnFinalizarVenda.setText("Finalizar Venda");
+        btnFinalizarVenda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnFinalizarVendaMouseClicked(evt);
+            }
+        });
         btnFinalizarVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFinalizarVendaActionPerformed(evt);
@@ -434,8 +439,8 @@ public class frmCadastroVendaPAINEL extends javax.swing.JPanel {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         CadastrarVendaCache();
         listarValoresVendaCache();
-        LimparCamposProduto();
         SomarVendaCache();
+        listarValoresProduto();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -443,22 +448,28 @@ public class frmCadastroVendaPAINEL extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnCancelarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarVendaActionPerformed
-        LimparCamposProduto();
-        ExcluirVendaCache();
-        listarValoresVendaCache();
 
+        ExcluirVendaCache();
+
+        listarValoresVendaCache();
+        LimparCamposProduto();
     }//GEN-LAST:event_btnCancelarVendaActionPerformed
 
     private void btnFinalizarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarVendaActionPerformed
         SetarCamposVenda();
         CadastrarVendaTotal();
-
+        listarValoresVendaCache();
+        ExcluirVendaCache();
     }//GEN-LAST:event_btnFinalizarVendaActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         SetarCamposVenda();
 
     }//GEN-LAST:event_btnConfirmarActionPerformed
+
+    private void btnFinalizarVendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFinalizarVendaMouseClicked
+
+    }//GEN-LAST:event_btnFinalizarVendaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -572,6 +583,7 @@ public class frmCadastroVendaPAINEL extends javax.swing.JPanel {
         VendaCacheDTO objvendacachedto = new VendaCacheDTO();
         VendaCacheDAO objvendacachedao = new VendaCacheDAO();
         objvendacachedao.excluirVendaCache(objvendacachedto);
+
     }
 
     private void CadastrarVendaCache() {
@@ -583,17 +595,16 @@ public class frmCadastroVendaPAINEL extends javax.swing.JPanel {
         nomeProdutoCache = txtNomeProduto.getText();
         quantidadeProdutoCache = Integer.parseInt(txtQuantidadeProduto.getText());
         valorVendaCache = Float.parseFloat(txtPrecoProduto.getText());
-        
-        
+
         id_setar = Integer.parseInt(tabelaProduto.getModel().getValueAt(setar, 0).toString());
         compara = Integer.parseInt(tabelaProduto.getModel().getValueAt(setar, 3).toString());
 
         if (quantidadeProdutoCache > compara && quantidadeProdutoCache < 1) {
             JOptionPane.showMessageDialog(null, "Erro: Quantidade maior que estoque!");
         } else {
-            
+
             quantidadeProdutoAtt = compara - quantidadeProdutoCache;
-            
+
             String sql = "update produto set quant_produto = ? where id_produto = ?";
             conn = new ConexaoDAO().conectaBD();
 
@@ -605,7 +616,7 @@ public class frmCadastroVendaPAINEL extends javax.swing.JPanel {
                 pstm.execute();
                 pstm.close();
             } catch (SQLException erro) {
-                JOptionPane.showMessageDialog(null,"Quantidade Att" + erro);
+                JOptionPane.showMessageDialog(null, "Quantidade Att" + erro);
             }
 
             valorQuantidadeProdutoVendaCache = quantidadeProdutoCache * valorVendaCache;
@@ -621,16 +632,18 @@ public class frmCadastroVendaPAINEL extends javax.swing.JPanel {
         }
     }
 
+
     private void CadastrarVendaTotal() {
         String nomeCliente, formaPagamento;
-        float descontoVenda, valorPagoVenda, totalProdutoVenda, totalVenda;
+        float descontoVenda, valorPagoVenda, totalProdutoVenda, trocoVenda, totalVenda;
 
         nomeCliente = txtNomeCliente.getText();
         formaPagamento = txtFormaPagamento.getText();
         descontoVenda = Float.parseFloat(txtDesconto.getText());
-        valorPagoVenda = Float.parseFloat(txtVendaDesconto.getText());
+        valorPagoVenda = Float.parseFloat(txtValorPago.getText());
         totalProdutoVenda = Float.parseFloat(txtVendaTotal.getText());
         totalVenda = Float.parseFloat(txtVendaTotalFinal.getText());
+        trocoVenda = Float.parseFloat(txtVendaTroco.getText());
 
         VendaTotalDTO objvendatotaldto = new VendaTotalDTO();
         objvendatotaldto.setCliente_venda(nomeCliente);
@@ -639,9 +652,12 @@ public class frmCadastroVendaPAINEL extends javax.swing.JPanel {
         objvendatotaldto.setValor_pago_venda(valorPagoVenda);
         objvendatotaldto.setTotal_produto_venda(totalProdutoVenda);
         objvendatotaldto.setTotal_venda(totalVenda);
+        objvendatotaldto.setTroco_venda(trocoVenda);
 
         VendaTotalDAO objvendatotaldao = new VendaTotalDAO();
         objvendatotaldao.cadastrarVendaTotal(objvendatotaldto);
+
+        JOptionPane.showMessageDialog(null, "Venda Concluida!");
     }
 
     private void SetarCamposVenda() {

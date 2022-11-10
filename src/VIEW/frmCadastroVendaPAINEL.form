@@ -566,6 +566,7 @@
         <Property name="text" type="java.lang.String" value="Finalizar Venda"/>
       </Properties>
       <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnFinalizarVendaMouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFinalizarVendaActionPerformed"/>
       </Events>
     </Component>
