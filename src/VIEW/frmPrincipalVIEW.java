@@ -53,6 +53,7 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
         painelCentral = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocation(new java.awt.Point(100, 100));
         setResizable(false);
 
         painelMenu.setBackground(new java.awt.Color(25, 89, 163));
@@ -194,7 +195,7 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(219, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         painelCentral.setBackground(new java.awt.Color(255, 255, 255));
@@ -212,10 +213,13 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(painelMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(painelCentral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(painelCentral, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(1258, 708));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -292,17 +296,17 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel logoIMG;
-    private javax.swing.JLabel logoLabel;
-    private javax.swing.JPanel painelCentral;
-    private javax.swing.JPanel painelMenu;
+    javax.swing.JButton jButton1;
+    javax.swing.JButton jButton2;
+    javax.swing.JButton jButton3;
+    javax.swing.JButton jButton4;
+    javax.swing.JButton jButton6;
+    javax.swing.JButton jButton7;
+    javax.swing.JSeparator jSeparator1;
+    javax.swing.JLabel logoIMG;
+    javax.swing.JLabel logoLabel;
+    javax.swing.JPanel painelCentral;
+    javax.swing.JPanel painelMenu;
     // End of variables declaration//GEN-END:variables
 
     

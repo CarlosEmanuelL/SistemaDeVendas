@@ -29,8 +29,6 @@ public class frmCadastroProdutoPAINEL extends javax.swing.JPanel {
     public frmCadastroProdutoPAINEL() {
         initComponents();
         listarValores();
-        restaurarDadosComboBoxMarca();
-
     }
 
     /**
@@ -48,15 +46,11 @@ public class frmCadastroProdutoPAINEL extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         txtNomeProduto = new javax.swing.JTextField();
         txtQuantidadeProduto = new javax.swing.JTextField();
         txtPrecoCompra = new javax.swing.JTextField();
         txtPrecoVenda = new javax.swing.JTextField();
         txtCodigoProduto = new javax.swing.JTextField();
-        cbxFornecedor = new javax.swing.JComboBox<>();
-        cbxMarca = new javax.swing.JComboBox<>();
         btnCadastrar = new javax.swing.JToggleButton();
         btnCancelar = new javax.swing.JToggleButton();
         btnVerificar = new javax.swing.JToggleButton();
@@ -96,23 +90,11 @@ public class frmCadastroProdutoPAINEL extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(25, 89, 163));
         jLabel5.setText("Código do Produto:");
 
-        jLabel6.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(25, 89, 163));
-        jLabel6.setText("Marca:");
-
-        jLabel7.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(25, 89, 163));
-        jLabel7.setText("Fornecedor:");
-
         txtNomeProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNomeProdutoActionPerformed(evt);
             }
         });
-
-        cbxFornecedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
-
-        cbxMarca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
 
         btnCadastrar.setBackground(new java.awt.Color(25, 89, 163));
         btnCadastrar.setForeground(new java.awt.Color(255, 255, 255));
@@ -152,7 +134,7 @@ public class frmCadastroProdutoPAINEL extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Nome", "Quantidade", "Codigo", "Preço Compra", "Preço Venda", "Marca", "Funcionário"
+                "ID", "Nome", "Quantidade", "Codigo", "Preço Compra", "Preço Venda"
             }
         ));
         jScrollPane1.setViewportView(tabelaProduto);
@@ -222,42 +204,37 @@ public class frmCadastroProdutoPAINEL extends javax.swing.JPanel {
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel1))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(txtCodigoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabel3))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(txtNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(63, 63, 63)
-                            .addComponent(jLabel2))
-                        .addComponent(jLabel4))
+                        .addComponent(jLabel4)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(txtNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel2))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(txtCodigoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel3))))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtQuantidadeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtPrecoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtPrecoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(cbxMarca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cbxFornecedor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btnVerificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btnCadastrar)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btnCarregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnVerificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnCadastrar)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnCarregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(49, 49, 49))))
                 .addContainerGap(32, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
@@ -285,14 +262,8 @@ public class frmCadastroProdutoPAINEL extends javax.swing.JPanel {
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtPrecoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(cbxFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                    .addComponent(txtPrecoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(69, 69, 69)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCadastrar)
                     .addComponent(btnVerificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -302,9 +273,9 @@ public class frmCadastroProdutoPAINEL extends javax.swing.JPanel {
                     .addComponent(jLabel8)
                     .addComponent(txtIdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCarregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(160, 160, 160))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -354,15 +325,11 @@ public class frmCadastroProdutoPAINEL extends javax.swing.JPanel {
     private javax.swing.JToggleButton btnCarregar;
     private javax.swing.JToggleButton btnExcluir;
     private javax.swing.JToggleButton btnVerificar;
-    private javax.swing.JComboBox<String> cbxFornecedor;
-    private javax.swing.JComboBox<String> cbxMarca;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelTitulo;
@@ -391,8 +358,7 @@ public class frmCadastroProdutoPAINEL extends javax.swing.JPanel {
                     lista.get(num).getQuant_produto(),
                     lista.get(num).getCod_produto(),
                     lista.get(num).getValor_compra(),
-                    lista.get(num).getValor_venda(),
-                    lista.get(num).getId_marca()
+                    lista.get(num).getValor_venda() 
                 });
             }
         } catch (Exception erro) {
@@ -402,7 +368,7 @@ public class frmCadastroProdutoPAINEL extends javax.swing.JPanel {
 
     private void CadastrarProduto() {
         String nomeProduto, codigoProduto;
-        int quantidadeProduto, codmarca;
+        int quantidadeProduto;
         float valorCompra, valorVenda;
 
         nomeProduto = txtNomeProduto.getText();
@@ -410,7 +376,6 @@ public class frmCadastroProdutoPAINEL extends javax.swing.JPanel {
         codigoProduto = txtCodigoProduto.getText();
         valorCompra = Float.parseFloat(txtPrecoCompra.getText());
         valorVenda = Float.parseFloat(txtPrecoVenda.getText());
-        codmarca = id_marca.get(cbxMarca.getSelectedIndex() - 1);
 
         ProdutoDTO objprodutodto = new ProdutoDTO();
         objprodutodto.setNome_produto(nomeProduto);
@@ -418,7 +383,6 @@ public class frmCadastroProdutoPAINEL extends javax.swing.JPanel {
         objprodutodto.setCod_produto(codigoProduto);
         objprodutodto.setValor_compra(valorCompra);
         objprodutodto.setValor_venda(valorVenda);
-        objprodutodto.setId_marca(codmarca);
 
         ProdutoDAO objprodutodao = new ProdutoDAO();
         objprodutodao.cadastrarProduto(objprodutodto);
@@ -491,23 +455,6 @@ public class frmCadastroProdutoPAINEL extends javax.swing.JPanel {
 
         ProdutoDAO objprodutodao = new ProdutoDAO();
         objprodutodao.excluirProduto(objprodutodto);
-    }
-
-    Vector<Integer> id_marca = new Vector<Integer>();
-
-    public void restaurarDadosComboBoxMarca() {
-
-        ProdutoDAO objprodutodao = new ProdutoDAO();
-        ResultSet rs = objprodutodao.listarMarca();
-
-        try {
-            while (rs.next()) {
-                id_marca.addElement(rs.getInt(1));
-                cbxMarca.addItem(rs.getString(2));
-            }
-        } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "Carregar Marca VIEW: " + erro);
-        }
     }
 
 }

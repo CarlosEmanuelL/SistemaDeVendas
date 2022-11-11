@@ -20,7 +20,7 @@ public class ProdutoDAO {
     ArrayList<ProdutoDTO> lista = new ArrayList<>();
 
     public void cadastrarProduto(ProdutoDTO objprodutodto) {
-        String sql = "insert into produto (nome_produto, quant_produto, cod_produto, valor_compra, valor_venda, id_marca) values (?,?,?,?,?,?)";
+        String sql = "insert into produto (nome_produto, quant_produto, cod_produto, valor_compra, valor_venda) values (?,?,?,?,?)";
 
         conn = new ConexaoDAO().conectaBD();
         
@@ -33,7 +33,7 @@ public class ProdutoDAO {
             pstm.setString(3, objprodutodto.getCod_produto());
             pstm.setFloat(4, objprodutodto.getValor_compra());
             pstm.setFloat(5, objprodutodto.getValor_venda());
-            pstm.setInt(6, objprodutodto.getId_marca());
+         
            
             
             
@@ -62,7 +62,7 @@ public class ProdutoDAO {
                 objprodutoDTO.setCod_produto(rs.getString("cod_produto"));
                 objprodutoDTO.setValor_compra(rs.getFloat("valor_compra"));
                 objprodutoDTO.setValor_venda(rs.getFloat("valor_venda"));
-                objprodutoDTO.setId_marca(rs.getInt("id_marca"));
+                
 
                 lista.add(objprodutoDTO);
 

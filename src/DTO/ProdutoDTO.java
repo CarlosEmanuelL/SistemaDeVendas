@@ -8,7 +8,7 @@ package DTO;
 public class ProdutoDTO {
     
     private String nome_produto, cod_produto;
-    private int quant_produto, id_produto, id_marca, quantidade_venda_cache;
+    private int quant_produto, id_produto, quantidade_venda_cache;
     private float valor_compra, valor_venda;
     
 
@@ -60,13 +60,6 @@ public class ProdutoDTO {
         this.id_produto = id_produto;
     }
 
-    public int getId_marca() {
-        return id_marca;
-    }
-
-    public void setId_marca(int id_marca) {
-        this.id_marca = id_marca;
-    }
 
     public int getQuantidade_venda_cache() {
         return quantidade_venda_cache;
