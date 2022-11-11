@@ -42,4 +42,34 @@ public class VendaTotalDAO {
             JOptionPane.showMessageDialog(null, "VendaTotalDAO Cadastrar: " + erro);
         }
     }
+     
+      public ArrayList<VendaTotalDTO> ListarVendaTotal() {
+        String sql = "select * from venda";
+        conn = new ConexaoDAO().conectaBD();
+
+        try {
+            pstm = conn.prepareStatement(sql);
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+
+                VendaTotalDTO objvendatotalDTO = new VendaTotalDTO();
+                objvendatotalDTO.setId_venda(rs.getInt("id_venda"));
+                objvendatotalDTO.setCliente_venda(rs.getString("cliente_venda"));
+                objvendatotalDTO.setForma_pagamento_venda(rs.getString("forma_pagamento_venda"));
+                objvendatotalDTO.setDesconto_venda(rs.getFloat("desconto_venda"));
+                objvendatotalDTO.setValor_pago_venda(rs.getFloat("valor_pago_venda"));
+                objvendatotalDTO.setTotal_produto_venda(rs.getFloat("total_produto_venda"));
+                objvendatotalDTO.setTotal_venda(rs.getFloat("total_venda"));
+                objvendatotalDTO.setTroco_venda(rs.getFloat("troco_venda"));
+               
+
+                lista.add(objvendatotalDTO);
+
+            }
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "VendaTotalDAO Listar: " + erro);
+        }
+        return lista;
+    }
 }

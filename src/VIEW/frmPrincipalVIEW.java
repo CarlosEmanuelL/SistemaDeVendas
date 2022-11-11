@@ -50,6 +50,8 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
         painelCentral = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -60,7 +62,7 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
 
         logoLabel.setFont(new java.awt.Font("Noto Sans Mono CJK HK", 1, 24)); // NOI18N
         logoLabel.setForeground(new java.awt.Color(255, 255, 255));
-        logoLabel.setText("e-solutions");
+        logoLabel.setText("E-Solutions");
 
         logoIMG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/relatorio-128px.png"))); // NOI18N
 
@@ -147,10 +149,37 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
             }
         });
 
+        jButton8.setBackground(new java.awt.Color(25, 89, 163));
+        jButton8.setFont(new java.awt.Font("Noto Sans Mono CJK HK", 1, 18)); // NOI18N
+        jButton8.setForeground(new java.awt.Color(255, 255, 255));
+        jButton8.setText("Histórico de Vendas");
+        jButton8.setFocusPainted(false);
+        jButton8.setFocusable(false);
+        jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton8MouseClicked(evt);
+            }
+        });
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout painelMenuLayout = new javax.swing.GroupLayout(painelMenu);
         painelMenu.setLayout(painelMenuLayout);
         painelMenuLayout.setHorizontalGroup(
             painelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelMenuLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(painelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jSeparator1)
+                    .addGroup(painelMenuLayout.createSequentialGroup()
+                        .addComponent(logoIMG)
+                        .addGap(18, 18, 18)
+                        .addComponent(logoLabel))
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(23, Short.MAX_VALUE))
             .addGroup(painelMenuLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(painelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -159,17 +188,9 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(painelMenuLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(painelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jSeparator1)
-                    .addGroup(painelMenuLayout.createSequentialGroup()
-                        .addComponent(logoIMG)
-                        .addGap(18, 18, 18)
-                        .addComponent(logoLabel)))
-                .addContainerGap(23, Short.MAX_VALUE))
         );
         painelMenuLayout.setVerticalGroup(
             painelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,19 +204,23 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
                         .addComponent(logoLabel)))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
+                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(77, 77, 77))
         );
 
         painelCentral.setBackground(new java.awt.Color(255, 255, 255));
@@ -208,7 +233,7 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(painelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(painelCentral, javax.swing.GroupLayout.DEFAULT_SIZE, 922, Short.MAX_VALUE))
+                .addComponent(painelCentral, javax.swing.GroupLayout.DEFAULT_SIZE, 916, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,6 +285,15 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
         carregarPainelPrincipal(cadastroUsuario);
     }//GEN-LAST:event_jButton7MouseClicked
 
+    private void jButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseClicked
+        frmHistoricoVendasPAINEL historicoVendas = new frmHistoricoVendasPAINEL();
+        carregarPainelPrincipal(historicoVendas);
+    }//GEN-LAST:event_jButton8MouseClicked
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton8ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -302,7 +336,9 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
     javax.swing.JButton jButton4;
     javax.swing.JButton jButton6;
     javax.swing.JButton jButton7;
+    javax.swing.JButton jButton8;
     javax.swing.JSeparator jSeparator1;
+    javax.swing.JSeparator jSeparator2;
     javax.swing.JLabel logoIMG;
     javax.swing.JLabel logoLabel;
     javax.swing.JPanel painelCentral;

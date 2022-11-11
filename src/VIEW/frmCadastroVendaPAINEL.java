@@ -473,7 +473,7 @@ public class frmCadastroVendaPAINEL extends javax.swing.JPanel {
         
         
         try {
-            JasperPrint print = JasperFillManager.fillReport("C:/Users/Caio/Documents/SistemaDeVendas/SistemaDeVendas/NotaVenda.jasper", null, conn);
+            JasperPrint print = JasperFillManager.fillReport("./NotaVenda.jasper", null, conn);
             JasperViewer.viewReport(print, false);
         } catch (JRException e){
             JOptionPane.showInputDialog(null,e);
