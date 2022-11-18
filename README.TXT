@@ -3,7 +3,7 @@
                                                             ========================
 
 -Sales system made entirely using the java language and has as a sql database. 
--The system has a register of products, customers, suppliers, brands, users.
+-The system has a register of products, customers, suppliers, brandsusers.
 
                                                             ========================
                                                                       LOGIN
